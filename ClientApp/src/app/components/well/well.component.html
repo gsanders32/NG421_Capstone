@@ -1,0 +1,58 @@
+<h1 id="tableLabel">Wells</h1>
+
+<p *ngIf="!wells"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="wells">
+  <thead>
+    <tr>
+      <th>District #</th>
+      <th>Elevation</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let x of wells">
+      <td>{{ x.districtNumber }}</td>
+      <td>{{ x.elevation }}</td>
+      <td>{{ x.latitude }}</td>
+      <td>{{ x.longitude }}</td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <hr />
+  <h1>Add Well</h1>
+</div>
+<form>
+  <div class="row">
+    <div class="col">
+      <div class="form-group ">
+        <label for="districtNumber">District Number</label>
+        <input type="number" class="form-control" id="districtNumber" placeholder="e.g. 11111" [(ngModel)]="newWell.districtNumber" name="districtNumber">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="elevation">Elevation</label>
+        <input type="number" class="form-control" id="elevation" placeholder="e.g. 34234" [(ngModel)]="newWell.elevation" name="elevation">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group ">
+        <label for="latitude">Latitude</label>
+        <input type="number" class="form-control" id="latitude" placeholder="e.g. 34.334354" [(ngModel)]="newWell.latitude" name="latitude">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="longitude">Longitude</label>
+        <input type="number" class="form-control" id="longitude" placeholder="e.g. 34234" [(ngModel)]="newWell.longitude" name="longitude">
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="addWell()">Submit</button>
+</form>
+
