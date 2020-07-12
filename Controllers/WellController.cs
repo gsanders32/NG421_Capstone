@@ -37,5 +37,18 @@ namespace capstone.Controllers
             }
             return well;
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var well = context.Wells.Find(id);
+                if (well == null) return NotFound();
+                context.Remove(well);
+                context.SaveChanges();
+                return NoContent();
+            }
+        }
     }
 }

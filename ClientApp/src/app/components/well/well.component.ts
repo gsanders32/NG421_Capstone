@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Iwell } from '../../interfaces/iwell';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-well',
@@ -27,6 +28,12 @@ export class WellComponent implements OnInit {
   async addWell() {
     await this.http.post<Iwell>(this.baseUrl + 'well', this.newWell).toPromise();
     this.newWell = { districtNumber: this.dNumber, elevation: this.eNumber, latitude: this.latNumber, longitude: this.longNumber };
+    this.wells = await this.http.get<Iwell[]>(this.baseUrl + 'well').toPromise();
+  }
+
+  async deleteWell(x) {
+    await this.http.delete<Iwell>(this.baseUrl + 'well' + '/' + x.id).toPromise();
+    console.log('Delete called');
     this.wells = await this.http.get<Iwell[]>(this.baseUrl + 'well').toPromise();
   }
 }
